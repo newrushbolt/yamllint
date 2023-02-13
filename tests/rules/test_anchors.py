@@ -83,7 +83,6 @@ otherkey: *othermissedkeyanchor
 '''
 
 
-
 DEFAULT = {'forbid-unknown-aliases': True,
            'forbid-duplicated-anchors': False}
 
@@ -95,7 +94,7 @@ class AnchorsTestCase(RuleTestCase):
         conf = ('anchors:\n'
                 '  forbid-unknown-aliases: false\n'
                 '  forbid-duplicated-anchors: false\n'
-        )
+                )
 
         self.check(NORMAL_ANCHOR, conf)
         self.check(NORMAL_ANCHOR_NO_DOC_START, conf)
@@ -113,7 +112,7 @@ class AnchorsTestCase(RuleTestCase):
         conf = ('anchors:\n'
                 '  forbid-unknown-aliases: true\n'
                 '  forbid-duplicated-anchors: false\n'
-        )
+                )
 
         self.check(NORMAL_ANCHOR, conf)
         self.check(DUPLICATED_ANCHOR, conf)
@@ -132,7 +131,7 @@ class AnchorsTestCase(RuleTestCase):
         conf = ('anchors:\n'
                 '  forbid-unknown-aliases: false\n'
                 '  forbid-duplicated-anchors: true\n'
-        )
+                )
 
         self.check(NORMAL_ANCHOR, conf)
         self.check(DUPLICATED_ANCHOR, conf, problem=(3, 7))
@@ -149,7 +148,7 @@ class AnchorsTestCase(RuleTestCase):
         conf = ('anchors:\n'
                 '  forbid-unknown-aliases: true\n'
                 '  forbid-duplicated-anchors: true\n'
-        )
+                )
 
         self.check(NORMAL_ANCHOR, conf)
         self.check(DUPLICATED_ANCHOR, conf, problem=(3, 7))

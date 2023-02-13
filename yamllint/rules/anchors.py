@@ -14,11 +14,13 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-Use this rule to prevent duplicated anchors and referencing to non-existent anchors.
+Use this rule to prevent duplicated anchors
+  and referencing to non-existent anchors.
 
 .. rubric:: Options
 
-* Use ``forbid-unknown-aliases`` to prevent referencing to anchors before assigment or referencing to non-existent anchors.
+* Use ``forbid-unknown-aliases`` to prevent referencing to anchors
+  before assigment or referencing to non-existent anchors.
 * Use ``forbid-duplicated-anchors`` to prevent duplicated anchors.
 
 
@@ -30,20 +32,20 @@ Use this rule to prevent duplicated anchors and referencing to non-existent anch
    ::
 
     clients:
-        jack: &jack_client
-            billing_id: 1234
-        bill: &bill_client
-            billing_id: 5678
+      jack: &jack_client
+        billing_id: 1234
+      bill: &bill_client
+        billing_id: 5678
     target_client: *jack_client
 
    the following code snippet would **FAIL**:
    ::
 
     clients:
-        jack: &jack_client
-            billing_id: 1234
-        bill: &jack_client
-            billing_id: 5678
+      jack: &jack_client
+        billing_id: 1234
+      bill: &jack_client
+        billing_id: 5678
     target_client: *jack_client
 
 #. With ``anchors: {forbid-unknown-aliases: true}``
@@ -114,7 +116,6 @@ def check(conf, token, prev, next, nextnext, context):
             yield LintProblem(
                 token.start_mark.line + 1, token.start_mark.column + 1,
                 f'anchor "{token.value}" is used before assignment')
-
 
     if conf['forbid-duplicated-anchors'] and isinstance(token, AnchorToken):
         anchors_count = context['anchors'].count(token.value)
