@@ -31,6 +31,12 @@ key1: &keyanchor a
 key2: &keyanchor b
 otherkey: *keyanchor
 '''
+TRIPLE_DUPLICATED_ANCHOR = '''---
+key1: &keyanchor a
+key2: &keyanchor b
+key3: &keyanchor c
+otherkey: *keyanchor
+'''
 
 HIT_ANCHOR_POINTER = '''---
 key: &keyanchor a
@@ -99,6 +105,7 @@ class AnchorsTestCase(RuleTestCase):
         self.check(NORMAL_ANCHOR, conf)
         self.check(NORMAL_ANCHOR_NO_DOC_START, conf)
         self.check(DUPLICATED_ANCHOR, conf)
+        self.check(TRIPLE_DUPLICATED_ANCHOR, conf)
         self.check(HIT_ANCHOR_POINTER, conf)
         self.check(MISS_ANCHOR_POINTER, conf)
         self.check(HIT_ANCHOR_MERGE, conf)
@@ -117,6 +124,7 @@ class AnchorsTestCase(RuleTestCase):
         self.check(NORMAL_ANCHOR, conf)
         self.check(DUPLICATED_ANCHOR, conf)
         self.check(HIT_ANCHOR_POINTER, conf)
+        self.check(TRIPLE_DUPLICATED_ANCHOR, conf)
         self.check(MISS_ANCHOR_POINTER, conf, problem=(3, 11))
         self.check(HIT_ANCHOR_MERGE, conf)
         self.check(MISS_ANCHOR_MERGE, conf, problem=(5, 7))
@@ -135,6 +143,8 @@ class AnchorsTestCase(RuleTestCase):
 
         self.check(NORMAL_ANCHOR, conf)
         self.check(DUPLICATED_ANCHOR, conf, problem=(3, 7))
+        self.check(TRIPLE_DUPLICATED_ANCHOR, conf,
+                   problem1=(3, 7), problem2=(4, 7))
         self.check(HIT_ANCHOR_POINTER, conf)
         self.check(MISS_ANCHOR_POINTER, conf)
         self.check(HIT_ANCHOR_MERGE, conf)
@@ -152,6 +162,8 @@ class AnchorsTestCase(RuleTestCase):
 
         self.check(NORMAL_ANCHOR, conf)
         self.check(DUPLICATED_ANCHOR, conf, problem=(3, 7))
+        self.check(TRIPLE_DUPLICATED_ANCHOR, conf,
+                   problem1=(3, 7), problem2=(4, 7))
         self.check(HIT_ANCHOR_POINTER, conf)
         self.check(MISS_ANCHOR_POINTER, conf, problem=(3, 11))
         self.check(HIT_ANCHOR_MERGE, conf)

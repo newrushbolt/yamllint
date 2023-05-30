@@ -118,8 +118,7 @@ def check(conf, token, prev, next, nextnext, context):
                 f'anchor "{token.value}" is used before assignment')
 
     if conf['forbid-duplicated-anchors'] and isinstance(token, AnchorToken):
-        anchors_count = context['anchors'].count(token.value)
-        if anchors_count == 2:
+        if context['anchors'].count(token.value) > 1:
             yield LintProblem(
                 token.start_mark.line + 1, token.start_mark.column + 1,
                 f'duplicated anchor "{token.value}')
